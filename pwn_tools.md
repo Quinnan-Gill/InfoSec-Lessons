@@ -100,4 +100,7 @@ End of assembler dump.
 (gdb) quit
 ```
 
-This is the disassembly for the 
+This is the disassembly for the the main function (which is the only important function)
+
+I ran this through `radare2` (which is on kali and need to install on ubuntu)
+
