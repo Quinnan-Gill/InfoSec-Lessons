@@ -59,7 +59,6 @@ so in gdb:
 ```
 (gdb) set disassembly-flavor intel
 (gdb) disass main
-(gdb) disass main
 Dump of assembler code for function main:
    0x0000000000400641 <+0>:	push   rbp
    0x0000000000400642 <+1>:	mov    rbp,rsp
@@ -97,10 +96,22 @@ Dump of assembler code for function main:
    0x00000000004006de <+157>:	leave  
    0x00000000004006df <+158>:	ret    
 End of assembler dump.
-(gdb) quit
 ```
 
 This is the disassembly for the the main function (which is the only important function)
 
-I ran this through `radare2` (which is on kali and need to install on ubuntu)
+I ran this through `radare2` (which is pre-installed kali and need to install on ubuntu). This disassembles it and adds some commentary such as that the command `0x40077c` is for `/bin/bash`. So our goal is to execute that code.
 
+The `0x40077c` is on line `<+110>`, and going up the command structure we see:
+```asm
+cmp    eax,0xcaf3baee
+jne    0x4006bb <main+122>
+```
+This compares the the value in `eax` in to `0xcaf3baee` and jumps if it is not equal (`jne`). We don't want it to jump.
+
+So looking at attack vectors there is the input. To test how much we need to overflow the buffer we use a a break point at `<+103>`.
+```
+(gdb) break *main+103
+Breakpoint 1 at 0x4006a8
+(gdb) run
+Starting/program
