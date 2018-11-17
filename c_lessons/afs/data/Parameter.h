@@ -10,5 +10,5 @@ struct parameter {
     const int FILE_NAME_LEN = FILE_ITEM_LEN - FILE_BLOCK_NAME_LEN;
 
     const char VICE_DIR[] = "D:\/\/afs.server\/";
-    const *FILE
+    const int ROOT_FID =
 }
