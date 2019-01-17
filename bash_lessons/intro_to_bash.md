@@ -4,6 +4,9 @@ So say there are 10,000 files in a directory and you want to move all the files 
 
 If you have experience with Python's os or subprocess library, or Java's ProcessBuilder, or C's execv (or other) commands you could do this in that language. Bash is basic a way not to need special commands or libraries. It is practically a way to run linux commands one after eachother and perform control flow. Bash is uses just linux commands like ls, find, mkdir, etc.
 
+### Announcements
+* https://teaser.insomnihack.ch/
+
 ### Schedule
 * Announcements
 * Introduction to Bash scripting
@@ -54,6 +57,10 @@ done
 ```
 
 So here are some of the basics to bash scripting. It gets more complicated with functions and different linux commands but it is super useful.
+
+## CTF challenge
+
+Use thoth or pitt ssh and go to directory `/afs/pitt.edu/home/q/c/qcg1/ctf/`
 
 ## OverTheWire
 
