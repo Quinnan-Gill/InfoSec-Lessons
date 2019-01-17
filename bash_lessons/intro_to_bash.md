@@ -4,6 +4,17 @@ So say there are 10,000 files in a directory and you want to move all the files 
 
 If you have experience with Python's os or subprocess library, or Java's ProcessBuilder, or C's execv (or other) commands you could do this in that language. Bash is basic a way not to need special commands or libraries. It is practically a way to run linux commands one after eachother and perform control flow. Bash is uses just linux commands like ls, find, mkdir, etc.
 
+### Schedule
+* Announcements
+* Introduction to Bash scripting
+* Hackover bash challenge review
+* OverTheWire Level 22 and up
+
+### Cheat Sheet
+
+Bash scripting for me has been a lot of google foo.
+https://devhints.io/bash
+
 
 ## Control Flow
 So you are currently you are in the directory with all the files. First create the directory called FrontEnd/. But you do not know if it exists are not so how need CONTROl FLOW. We need an if statement:
@@ -42,4 +53,10 @@ do
 done
 ```
 
-So here are some of the basics to bash scripting. It gets more complicated with functions and different linux commands but it is super useful. OverTheWire has some good bash challenges. Also
+So here are some of the basics to bash scripting. It gets more complicated with functions and different linux commands but it is super useful.
+
+## OverTheWire
+
+Level 22 is where we get into bash scripting the ssh is:
+`ssh bandit20@bandit.labs.overthewire.org -p 2220`
+Password: Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
