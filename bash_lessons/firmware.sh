@@ -2,7 +2,7 @@
 set -eu
 
 SELF=$(pwd)/$0
-DIR=$(mktemp -d)
+DIR= ./
 cd "$DIR"
 
 ls .
