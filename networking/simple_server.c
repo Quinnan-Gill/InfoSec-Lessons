@@ -19,7 +19,7 @@ int main(void) {
     if ((sockfd = socket(PF_INET, SOCK_STREAM, 0)) == -1)
         fatal("in socket"); // exit if
 
-    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(1)) == -1)
+    if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int)) == -1)
         fatal("setting socket option SO_REUSEADDR");
 
     host_addr.sin_family = AF_INET; // Host byte order
