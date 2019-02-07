@@ -25,12 +25,12 @@ int main(void) {
     host_addr.sin_family = AF_INET; // Host byte order
     host_addr.sin_port = htons(PORT); // Short, network byte order
     host_addr.sin_addr.s_addr = 0; // Automatically fill with my IP.
-    memset(&*host_addr.sin_zero), '\0', 8); // Zero the rest of the struct
+    memset(&(host_addr.sin_zero), '\0', 8); // Zero the rest of the struct
 
     if (bind(sockfd, (struct sockaddr *)&host_addr, sizeof(struct sockaddr)) == -1)
         fatal("binding to socket");
 
-    if (listen(socket, 5) == -1)
+    if (listen(sockfd, 5) == -1)
         fatal("listening on socket");
 
     while(1) { // Accept loop
