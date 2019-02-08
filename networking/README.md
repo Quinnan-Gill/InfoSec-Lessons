@@ -66,7 +66,8 @@ socket -> setsockopt -> (set host) and bind -> listen -> accept -> accpet -> ...
 #include <sys.socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "hacking.h"
+#include "error.h"
+#include "dump.h"
 
 #define PORT 7890 // The port we use
 
